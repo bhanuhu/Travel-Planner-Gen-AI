@@ -2,7 +2,7 @@
 import { useState, KeyboardEvent } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Send } from "lucide-react";
+import { Send, Loader2 } from "lucide-react";
 
 interface ChatInputProps {
   onSend: (message: string) => void;
@@ -27,7 +27,7 @@ const ChatInput = ({ onSend, isLoading }: ChatInputProps) => {
   };
 
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex items-center gap-3 bg-white p-3 rounded-xl shadow-sm">
       <Input
         type="text"
         placeholder="Type your message..."
@@ -35,15 +35,16 @@ const ChatInput = ({ onSend, isLoading }: ChatInputProps) => {
         onChange={(e) => setMessage(e.target.value)}
         onKeyDown={handleKeyDown}
         disabled={isLoading}
-        className="flex-1"
+        className="flex-1 border-gray-200 focus:ring-blue-500"
       />
       <Button
         onClick={handleSend}
         disabled={isLoading || !message.trim()}
-        className="px-4"
+        size="icon"
+        className={`rounded-full h-10 w-10 ${message.trim() ? "bg-blue-500 hover:bg-blue-600" : "bg-gray-300"}`}
       >
         {isLoading ? (
-          <div className="h-5 w-5 animate-spin rounded-full border-2 border-white border-t-transparent" />
+          <Loader2 className="h-5 w-5 animate-spin" />
         ) : (
           <Send className="h-5 w-5" />
         )}
