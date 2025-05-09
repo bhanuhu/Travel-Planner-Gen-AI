@@ -5,6 +5,7 @@ import ChatInput from "@/components/ChatInput";
 import { ArrowUp, MessageSquare } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { supabase } from "@/integrations/supabase/client";
 
 interface Message {
   content: string;
@@ -34,19 +35,18 @@ const Index = () => {
     setLoading(true);
 
     try {
-      const response = await fetch("http://localhost:5000/chat", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ prompt: message }),
+      // Call the Supabase Edge Function
+      const { data, error } = await supabase.functions.invoke('chat', {
+        body: { prompt: message }
       });
 
-      if (!response.ok) {
-        throw new Error(`Error: ${response.status}`);
+      if (error) {
+        throw error;
       }
 
-      const data = await response.json();
+      if (!data || !data.response) {
+        throw new Error("Invalid response from the server");
+      }
       
       // Add AI response to chat
       const botMessage: Message = { content: data.response, isUser: false };
@@ -55,7 +55,7 @@ const Index = () => {
       console.error("Error:", error);
       toast({
         title: "Connection Error",
-        description: "Could not connect to the GPT-2 service.",
+        description: "Could not connect to the AI service.",
         variant: "destructive",
       });
     } finally {
