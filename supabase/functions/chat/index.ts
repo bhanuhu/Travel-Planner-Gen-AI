@@ -1,6 +1,6 @@
 
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
-import { pipeline } from "@huggingface/transformers";
+import { pipeline } from "https://esm.sh/@huggingface/transformers@3.5.1";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -26,26 +26,37 @@ serve(async (req) => {
 
     console.log("Received prompt:", prompt);
 
-    // Initialize the text generation pipeline
-    const generator = await pipeline("text-generation", "gpt2");
+    try {
+      // Initialize the text generation pipeline
+      const generator = await pipeline("text-generation", "gpt2");
 
-    // Generate response
-    const result = await generator(prompt, { 
-      max_length: 50,
-      do_sample: true
-    });
+      // Generate response
+      const result = await generator(prompt, { 
+        max_length: 50,
+        do_sample: true
+      });
 
-    console.log("Generated result:", result);
-    
-    // Extract the generated text
-    const response = result[0].generated_text;
+      console.log("Generated result:", result);
+      
+      // Extract the generated text
+      const response = result[0].generated_text;
 
-    return new Response(
-      JSON.stringify({ response }),
-      { headers: { ...corsHeaders, "Content-Type": "application/json" } }
-    );
+      return new Response(
+        JSON.stringify({ response }),
+        { headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    } catch (inferenceError) {
+      console.error("Error during model inference:", inferenceError);
+      return new Response(
+        JSON.stringify({ 
+          error: "AI model error", 
+          details: "There was an error processing your request with the AI model."
+        }),
+        { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
   } catch (error) {
-    console.error("Error during inference:", error);
+    console.error("Error processing request:", error);
     return new Response(
       JSON.stringify({ error: "Internal server error", details: error.message }),
       { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
