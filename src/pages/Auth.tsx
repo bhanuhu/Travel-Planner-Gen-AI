@@ -1,6 +1,6 @@
 
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -10,17 +10,29 @@ import { toast } from "@/hooks/use-toast";
 
 const Auth = () => {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const [isLoading, setIsLoading] = useState(false);
+  const [activeTab, setActiveTab] = useState("login");
+  
   const [loginForm, setLoginForm] = useState({
     email: "",
     password: "",
   });
+  
   const [signupForm, setSignupForm] = useState({
     name: "",
     email: "",
     password: "",
     confirmPassword: "",
   });
+
+  // Set active tab from URL param if provided
+  useEffect(() => {
+    const tab = searchParams.get("tab");
+    if (tab === "signup") {
+      setActiveTab("signup");
+    }
+  }, [searchParams]);
 
   const handleLoginChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLoginForm({
@@ -53,11 +65,20 @@ const Auth = () => {
       
       // Mock login for now
       setTimeout(() => {
+        // In a real app, this would be replaced with an API call to verify credentials
+        // For demo purposes, accept any credentials
+        localStorage.setItem("user", JSON.stringify({
+          email: loginForm.email,
+          name: "Demo User",
+          role: "user"
+        }));
+        
         toast({
           title: "Success",
           description: "You have successfully logged in!",
         });
         navigate("/dashboard");
+        setIsLoading(false);
       }, 1500);
       
     } catch (error) {
@@ -66,7 +87,6 @@ const Auth = () => {
         description: "Invalid email or password",
         variant: "destructive",
       });
-    } finally {
       setIsLoading(false);
     }
   };
@@ -97,11 +117,19 @@ const Auth = () => {
       
       // Mock signup for now
       setTimeout(() => {
+        // In a real app, this would be replaced with an API call to register the user
+        localStorage.setItem("user", JSON.stringify({
+          email: signupForm.email,
+          name: signupForm.name,
+          role: "user"
+        }));
+        
         toast({
           title: "Account Created",
           description: "Your account has been created successfully!",
         });
         navigate("/dashboard");
+        setIsLoading(false);
       }, 1500);
       
     } catch (error) {
@@ -110,7 +138,6 @@ const Auth = () => {
         description: "Failed to create account",
         variant: "destructive",
       });
-    } finally {
       setIsLoading(false);
     }
   };
@@ -123,7 +150,7 @@ const Auth = () => {
           <CardDescription>Login or create an account to manage your trips</CardDescription>
         </CardHeader>
         <CardContent>
-          <Tabs defaultValue="login">
+          <Tabs defaultValue={activeTab} value={activeTab} onValueChange={setActiveTab}>
             <TabsList className="grid w-full grid-cols-2">
               <TabsTrigger value="login">Login</TabsTrigger>
               <TabsTrigger value="signup">Sign Up</TabsTrigger>

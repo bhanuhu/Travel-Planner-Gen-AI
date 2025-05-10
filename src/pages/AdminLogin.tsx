@@ -37,10 +37,15 @@ const AdminLogin = () => {
     try {
       setIsLoading(true);
       
-      // Mock admin login for now
+      // Admin login logic
       setTimeout(() => {
-        // For demo purposes, only allow admin@example.com with password "admin123"
-        if (formData.email === "admin@example.com" && formData.password === "admin123") {
+        // For demo purposes, allow login with username "admin" and password "admins"
+        if ((formData.email === "admin@example.com" || formData.email === "admin") && formData.password === "admins") {
+          localStorage.setItem("admin", JSON.stringify({
+            email: formData.email,
+            role: "admin"
+          }));
+          
           toast({
             title: "Success",
             description: "Welcome to the admin dashboard!",
@@ -76,12 +81,12 @@ const AdminLogin = () => {
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
+              <Label htmlFor="email">Username or Email</Label>
               <Input
                 id="email"
                 name="email"
-                type="email"
-                placeholder="admin@example.com"
+                type="text"
+                placeholder="admin"
                 value={formData.email}
                 onChange={handleChange}
                 required
@@ -100,7 +105,7 @@ const AdminLogin = () => {
                 required
               />
               <p className="text-xs text-muted-foreground mt-1">
-                For demo: use admin@example.com / admin123
+                For demo: use admin / admins
               </p>
             </div>
             

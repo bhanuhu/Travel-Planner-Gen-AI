@@ -1,5 +1,5 @@
 
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -11,23 +11,33 @@ const Navbar = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  // Mock auth state for demo - in a real app, would come from a context
+  // Auth state
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const [isAdmin, setIsAdmin] = React.useState(false);
   
-  React.useEffect(() => {
-    // Check if user is logged in based on current route
-    // In a real app, this would be handled via auth context/state
-    setIsLoggedIn(location.pathname.includes("/dashboard"));
-    setIsAdmin(location.pathname.includes("/admin/dashboard"));
+  useEffect(() => {
+    // Check auth state on mount and when location changes
+    const checkAuthState = () => {
+      const user = localStorage.getItem("user");
+      const admin = localStorage.getItem("admin");
+      setIsLoggedIn(!!user);
+      setIsAdmin(!!admin);
+    };
+    
+    checkAuthState();
   }, [location.pathname]);
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   
   const handleLogout = () => {
-    // In a real app, this would call an auth service
-    setIsLoggedIn(false);
-    setIsAdmin(false);
+    if (isAdmin) {
+      localStorage.removeItem("admin");
+      setIsAdmin(false);
+    } else {
+      localStorage.removeItem("user");
+      setIsLoggedIn(false);
+    }
+    
     toast({
       title: "Logged Out",
       description: "You have been logged out successfully.",
