@@ -1,4 +1,3 @@
-
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -6,6 +5,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { format } from "date-fns";
 import { MapPin, Hotel, Bus, Car, Calendar, Users, DollarSign, Bookmark } from "lucide-react";
+import { toast } from "@/hooks/use-toast";
 
 // Sample trip plan data structure
 const sampleTripPlan = {
