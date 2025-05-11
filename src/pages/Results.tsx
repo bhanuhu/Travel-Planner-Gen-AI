@@ -30,7 +30,7 @@ import { toast } from "@/hooks/use-toast";
 import axios from "axios";
 
 
-const GEMINI_API_KEY=import.meta.env.REACT_APP_GEMINI_API_KEY;
+const GEMINI_API_KEY=import.meta.env.VITE_GEMINI_API_KEY;
 
 const Results = () => {
   const location = useLocation();

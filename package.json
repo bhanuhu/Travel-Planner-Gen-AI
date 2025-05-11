@@ -2,6 +2,7 @@
   "name": "vite_react_shadcn_ts",
   "private": true,
   "version": "0.0.0",
+  "homepage": "https://bhanuhu.github.io/Travel-Planner-Gen-AI/",
   "type": "module",
   "scripts": {
     "dev": "vite",
