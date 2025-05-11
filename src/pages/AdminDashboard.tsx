@@ -94,6 +94,7 @@ const initialSponsors = [
     active: false,
   },
 ];
+window.localStorage.setItem("sponsors", JSON.stringify(initialSponsors));
 
 const AdminDashboard = () => {
   const [bookings, setBookings] = useState(initialBookings);
@@ -134,6 +135,7 @@ const AdminDashboard = () => {
     
     const sponsor = sponsors.find(s => s.id === sponsorId);
     const newStatus = sponsor?.active ? "inactive" : "active";
+    window.localStorage.setItem("sponsors", JSON.stringify(sponsors));
     
     toast({
       title: "Sponsor Status Updated",

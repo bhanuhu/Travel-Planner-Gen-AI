@@ -1,7 +1,7 @@
 
 import React from "react";
 import { Link } from "react-router-dom";
-import { Facebook, Twitter, Instagram, Mail, Phone } from "lucide-react";
+import { Facebook, Twitter, Instagram, Mail, Phone, YoutubeIcon, LinkedinIcon, GithubIcon } from "lucide-react";
 
 const Footer = () => {
   return (
@@ -14,14 +14,14 @@ const Footer = () => {
               Find your perfect travel experience with personalized trip planning and seamless booking.
             </p>
             <div className="flex mt-4 space-x-4">
-              <a href="#" aria-label="Facebook" className="text-muted-foreground hover:text-foreground">
-                <Facebook size={18} />
+              <a href="https://github.com/bhanuhu" aria-label="Github" className="text-muted-foreground hover:text-foreground">
+                <GithubIcon size={18} />
               </a>
-              <a href="#" aria-label="Twitter" className="text-muted-foreground hover:text-foreground">
-                <Twitter size={18} />
+              <a href="https://linkedin.com/in/bhanu-aggarwal" aria-label="Linekedin" className="text-muted-foreground hover:text-foreground">
+                <LinkedinIcon size={18} />
               </a>
-              <a href="#" aria-label="Instagram" className="text-muted-foreground hover:text-foreground">
-                <Instagram size={18} />
+              <a href="https://www.youtube.com/@bhanuhu" aria-label="Youtube" className="text-muted-foreground hover:text-foreground">
+                <YoutubeIcon size={18} />
               </a>
             </div>
           </div>
@@ -39,16 +39,16 @@ const Footer = () => {
                   Plan a Trip
                 </Link>
               </li>
-              <li>
+              {/* <li>
                 <Link to="/auth" className="text-muted-foreground hover:text-foreground">
                   Login / Sign Up
                 </Link>
-              </li>
-              <li>
+              </li> */}
+              {/* <li>
                 <Link to="/dashboard" className="text-muted-foreground hover:text-foreground">
                   My Trips
                 </Link>
-              </li>
+              </li> */}
             </ul>
           </div>
           
@@ -68,11 +68,11 @@ const Footer = () => {
             <ul className="space-y-2">
               <li className="flex items-center text-muted-foreground">
                 <Mail className="w-4 h-4 mr-2" />
-                <span>support@travelplanner.com</span>
+                <span>bhanuaggarwal47@gmail.com</span>
               </li>
               <li className="flex items-center text-muted-foreground">
                 <Phone className="w-4 h-4 mr-2" />
-                <span>+1 (555) 123-4567</span>
+                <span>+91 7017xxx908</span>
               </li>
             </ul>
           </div>
