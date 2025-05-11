@@ -1,9 +1,8 @@
-
 import React, { useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { MenuIcon, X, User, LogOut } from "lucide-react";
+import { MenuIcon, X, LogOut } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 
 const Navbar = () => {
@@ -11,16 +10,13 @@ const Navbar = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  // Auth state
-  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+  // Auth state - only keeping admin state
   const [isAdmin, setIsAdmin] = React.useState(false);
   
   useEffect(() => {
-    // Check auth state on mount and when location changes
+    // Check admin auth state on mount and when location changes
     const checkAuthState = () => {
-      const user = localStorage.getItem("user");
       const admin = localStorage.getItem("admin");
-      setIsLoggedIn(!!user);
       setIsAdmin(!!admin);
     };
     
@@ -33,16 +29,13 @@ const Navbar = () => {
     if (isAdmin) {
       localStorage.removeItem("admin");
       setIsAdmin(false);
-    } else {
-      localStorage.removeItem("user");
-      setIsLoggedIn(false);
+      
+      toast({
+        title: "Logged Out",
+        description: "You have been logged out successfully.",
+      });
+      navigate("/");
     }
-    
-    toast({
-      title: "Logged Out",
-      description: "You have been logged out successfully.",
-    });
-    navigate("/");
   };
 
   return (
@@ -61,12 +54,6 @@ const Navbar = () => {
             Plan Trip
           </Link>
           
-          {isLoggedIn && !isAdmin && (
-            <Link to="/dashboard" className={`text-sm font-medium ${location.pathname === "/dashboard" ? "text-primary" : "text-muted-foreground hover:text-primary"}`}>
-              My Trips
-            </Link>
-          )}
-          
           {isAdmin && (
             <Link to="/admin/dashboard" className={`text-sm font-medium ${location.pathname === "/admin/dashboard" ? "text-primary" : "text-muted-foreground hover:text-primary"}`}>
               Admin Dashboard
@@ -74,23 +61,14 @@ const Navbar = () => {
           )}
         </nav>
 
-        {/* Desktop Auth Buttons */}
+        {/* Desktop Admin Auth Button */}
         <div className="hidden md:flex md:items-center md:gap-2">
-          {isLoggedIn || isAdmin ? (
+          {isAdmin ? (
             <Button variant="ghost" onClick={handleLogout}>
               <LogOut className="w-4 h-4 mr-2" />
               Logout
             </Button>
-          ) : (
-            <>
-              <Link to="/auth">
-                <Button variant="ghost">Login</Button>
-              </Link>
-              <Link to="/auth?tab=signup">
-                <Button>Sign Up</Button>
-              </Link>
-            </>
-          )}
+          ) : null}
         </div>
 
         {/* Mobile Menu Button */}
@@ -109,12 +87,6 @@ const Navbar = () => {
                 <Button variant="ghost" className="w-full justify-start">Plan Trip</Button>
               </Link>
               
-              {isLoggedIn && !isAdmin && (
-                <Link to="/dashboard" className="block" onClick={() => setIsMenuOpen(false)}>
-                  <Button variant="ghost" className="w-full justify-start">My Trips</Button>
-                </Link>
-              )}
-              
               {isAdmin && (
                 <Link to="/admin/dashboard" className="block" onClick={() => setIsMenuOpen(false)}>
                   <Button variant="ghost" className="w-full justify-start">Admin Dashboard</Button>
@@ -122,7 +94,7 @@ const Navbar = () => {
               )}
               
               <div className="pt-2 border-t">
-                {isLoggedIn || isAdmin ? (
+                {isAdmin && (
                   <Button 
                     variant="ghost" 
                     className="w-full justify-start" 
@@ -134,18 +106,6 @@ const Navbar = () => {
                     <LogOut className="w-4 h-4 mr-2" />
                     Logout
                   </Button>
-                ) : (
-                  <>
-                    <Link to="/auth" className="block" onClick={() => setIsMenuOpen(false)}>
-                      <Button variant="ghost" className="w-full justify-start">
-                        <User className="w-4 h-4 mr-2" />
-                        Login
-                      </Button>
-                    </Link>
-                    <Link to="/auth?tab=signup" className="block" onClick={() => setIsMenuOpen(false)}>
-                      <Button className="w-full mt-2">Sign Up</Button>
-                    </Link>
-                  </>
                 )}
               </div>
             </div>

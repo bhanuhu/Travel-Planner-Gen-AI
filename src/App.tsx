@@ -8,7 +8,6 @@ import MainLayout from "./layouts/MainLayout";
 import Index from "./pages/Index";
 import Search from "./pages/Search";
 import Results from "./pages/Results";
-import Auth from "./pages/Auth";
 import AdminLogin from "./pages/AdminLogin";
 import Dashboard from "./pages/Dashboard";
 import AdminDashboard from "./pages/AdminDashboard";
@@ -27,7 +26,6 @@ const App = () => (
           <Route path="/" element={<MainLayout><Home /></MainLayout>} />
           <Route path="/search" element={<MainLayout><Search /></MainLayout>} />
           <Route path="/results" element={<MainLayout><Results /></MainLayout>} />
-          <Route path="/auth" element={<MainLayout><Auth /></MainLayout>} />
           <Route path="/admin/login" element={<MainLayout><AdminLogin /></MainLayout>} />
           <Route path="/dashboard" element={<MainLayout><Dashboard /></MainLayout>} />
           <Route path="/admin/dashboard" element={<MainLayout><AdminDashboard /></MainLayout>} />

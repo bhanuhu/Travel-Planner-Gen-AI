@@ -15,7 +15,7 @@ const Home = () => {
           Find the best travel plans, accommodations, and transportation all in one place.
         </p>
         
-        <div className="grid grid-cols-1 gap-6 mt-12 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-6 mt-12 md:grid-cols-2">
           <Card>
             <CardHeader>
               <CardTitle>Find Your Trip</CardTitle>
@@ -27,21 +27,6 @@ const Home = () => {
             <CardFooter>
               <Link to="/search" className="w-full">
                 <Button className="w-full">Start Planning</Button>
-              </Link>
-            </CardFooter>
-          </Card>
-          
-          <Card>
-            <CardHeader>
-              <CardTitle>User Account</CardTitle>
-              <CardDescription>Login to manage your trips</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <p>Access your saved trips, view your booking history, and manage your travel preferences.</p>
-            </CardContent>
-            <CardFooter>
-              <Link to="/auth" className="w-full">
-                <Button variant="outline" className="w-full">Login / Sign Up</Button>
               </Link>
             </CardFooter>
           </Card>
