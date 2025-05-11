@@ -1,73 +1,85 @@
-# Welcome to your Lovable project
+# Travel Planner Gen AI
 
-## Project info
+**Live Demo**: [https://bhanuhu.github.io/Travel-Planner-Gen-AI/](https://bhanuhu.github.io/Travel-Planner-Gen-AI/)
 
-**URL**: https://lovable.dev/projects/6c0b97a7-8fbc-4479-825d-cb4a7d83f505
+Travel Planner Gen AI is an AI-powered web application that simplifies travel planning by generating personalized itineraries based on user preferences. Leveraging the capabilities of generative AI, this tool assists users in crafting tailored travel plans effortlessly.
 
-## How can I edit this code?
+## ✨ Features
 
-There are several ways of editing your application.
+- **Personalized Itinerary Generation**: Input your travel preferences, and the AI crafts a customized itinerary for you.
+- **User-Friendly Interface**: Designed with simplicity in mind to ensure a seamless user experience.
+- **Responsive Design**: Accessible across various devices, ensuring flexibility and convenience.
+- **Real-Time Suggestions**: Receive instant recommendations to enhance your travel plans.
 
-**Use Lovable**
+## 💰 Monetization Model
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/6c0b97a7-8fbc-4479-825d-cb4a7d83f505) and start prompting.
+Our platform operates on a dual-sided monetization model:
 
-Changes made via Lovable will be committed automatically to this repo.
+- **Sponsorships**: Travel-related businesses sponsor listings to feature their services within the app. These sponsored listings are prominently displayed, providing users with curated options while generating revenue for the platform.
 
-**Use your preferred IDE**
+- **Premium Services**: While the core itinerary planning features are free, users have the option to upgrade to premium services, such as automated booking. This premium feature streamlines the booking process, allowing users to confirm accommodations, flights, and activities directly through the app.
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+This model ensures that users can access essential planning tools at no cost, with the option to enhance their experience through premium features, while sponsors gain visibility among potential travelers.
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+## 🤖 AI Capabilities
 
-Follow these steps:
+- **Sponsor Data Aggregation**: AI-driven web scraping techniques are employed to gather real-time data from various travel-related websites. This includes information on accommodations, restaurants, intercity and intracity travel options, and local attractions. The AI processes and structures this data to ensure accurate and up-to-date listings for users.
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+- **Itinerary Optimization**: The AI analyzes user inputs, such as destination, travel dates, budget, and preferences, to generate the most efficient and enjoyable travel itinerary. By considering factors like location proximity, user ratings, and optimal travel routes, the AI crafts a balanced plan that includes accommodations, dining options, transportation, and activities.
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+- **Dynamic Recommendations**: Leveraging real-time data, the AI provides dynamic suggestions that adapt to changes in availability, pricing, and user preferences. This ensures that users receive the most relevant and timely recommendations throughout their planning process.
 
-# Step 3: Install the necessary dependencies.
-npm i
+## 🚀 Getting Started
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
+To set up and run the project locally:
 
-**Edit a file directly in GitHub**
+### Prerequisites
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+- [Node.js](https://nodejs.org/) (v14 or above)
+- [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/)
 
-**Use GitHub Codespaces**
+### Installation
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+1. **Clone the repository**:
 
-## What technologies are used for this project?
+   ```bash
+   git clone https://github.com/bhanuhu/Travel-Planner-Gen-AI.git
+   ```
 
-This project is built with:
+2. **Navigate to the project directory**:
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+   ```bash
+   cd Travel-Planner-Gen-AI
+   ```
 
-## How can I deploy this project?
+3. **Install dependencies**:
 
-Simply open [Lovable](https://lovable.dev/projects/6c0b97a7-8fbc-4479-825d-cb4a7d83f505) and click on Share -> Publish.
+   Using npm:
 
-## Can I connect a custom domain to my Lovable project?
+   ```bash
+   npm install
+   ```
 
-Yes, you can!
+4. **Start the development server**:
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+   Using npm:
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+   ```bash
+   npm run dev
+   ```
+
+5. **Access the application**:
+
+   Open your browser and navigate to `http://127.0.0.1:5173/Travel-Planner-Gen-AI/` to view the app.
+
+## 🛠️ Technologies Used
+
+- **Frontend**: Vite, React.js, HTML5, CSS3
+- **AI Integration**: GeminiAI
+- **Deployment**: GitHub Pages
+
+
+
+## 📬 Contact
+
+For any inquiries or feedback, please reach out to bhanuaggarwal47@gmail.com
